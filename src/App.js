@@ -1,5 +1,6 @@
 import React from 'react';
 import Validation from './Validation/Validation';
+import Char from './char/Char';
 
 export default class App extends React.Component {
   state = {
@@ -10,7 +11,24 @@ export default class App extends React.Component {
     this.setState({ userInput: event.target.value})
   }
 
+  deleteCharHanler = (i) => {
+    const text = [...this.state.userInput.split('')]
+    text.splice(i, 1);
+    const updatedText = text.join('');
+    this.setState({ userInput: updatedText });
+  }
+
   render() {
+    const charList = this.state.userInput.split('').map((char, i) => {
+      return <Char
+              character={char}
+              key={i}
+              delete={() => this.deleteCharHanler(i)}
+             />
+    });
+
+
+
     return (
       <div>
         <ol>
@@ -32,6 +50,7 @@ export default class App extends React.Component {
         <Validation
           inputLength={this.state.userInput.length}
         />
+        {charList}
       </div>
     )
   }
