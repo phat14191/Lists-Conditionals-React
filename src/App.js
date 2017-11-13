@@ -1,4 +1,5 @@
 import React from 'react';
+import Validation from './Validation/Validation';
 
 export default class App extends React.Component {
   state = {
@@ -28,6 +29,9 @@ export default class App extends React.Component {
           value={this.state.userInput}
         />
         <p>{this.state.userInput}</p>
+        <Validation
+          inputLength={this.state.userInput.length}
+        />
       </div>
     )
   }
